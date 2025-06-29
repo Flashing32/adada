@@ -285,6 +285,53 @@
   margin-bottom: 6px;
   color: #00e5ff;
 }
+/* ✅ Smooth scroll for whole page */
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ✅ Optimized scroll inside .screen */
+.screen {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ✅ Optimize glass blur boxes (less lag) */
+.wave-glass-box {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);  /* was 8px */
+  border-radius: 16px;
+  padding: 16px 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05),
+              0 0 10px rgba(0, 229, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.4s ease;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.wave-glass-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0, 255, 255, 0.3);
+}
+
+.wave-glass-box i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #00e5ff;
+}
+
+/* ✅ GPU boost for all elements */
+* {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
 
 
   </style>
