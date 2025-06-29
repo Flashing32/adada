@@ -1,0 +1,380 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at center, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 400px;
+      height: 800px;
+      background: #000;
+      border-radius: 40px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 4px #00e5ff,
+                  0 0 20px #00e5ff,
+                  0 0 40px rgba(0, 229, 255, 0.6),
+                  0 0 60px rgba(0, 229, 255, 0.4);
+    }
+
+    .notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 30px;
+      background: #111;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #212121, #424242);
+      border-radius: 30px;
+      padding: 20px 14px 80px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .box, .large-box {
+      background: linear-gradient(135deg, #1a1a1a, #2e2e2e);
+      border-radius: 14px;
+      box-shadow: 0 0 10px #00ffff99;
+      color: #0ff;
+      padding: 12px;
+    }
+
+    .box {
+      flex: 0 0 48%;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .large-box {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .animation-section {
+      width: 100%;
+      height: 120px;
+      background: #111;
+      border-radius: 16px;
+      box-shadow: inset 0 0 15px #00ffcc44;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mining-animation {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #00e5ff;
+      border-top: 6px solid transparent;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .typing-box {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      margin: 15px 0;
+      color: #fff;
+      font-size: 13px;
+      min-height: 32px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .wave-section {
+      height: 80px;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px #ff4d4d88;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .wave-svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      animation: waveMove 6s linear infinite;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    h3 {
+      text-align: center;
+      color: #ffd700;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .nav-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      border-radius: 20px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      width: 90%;
+      max-width: 320px;
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.3);
+      z-index: 999;
+    }
+
+    .nav-bar a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      color: #ccc;
+      font-size: 10px;
+      transition: 0.3s ease;
+    }
+
+    .nav-bar a i {
+      font-size: 16px;
+      margin-bottom: 2px;
+      display: block;
+    }
+
+    .nav-bar a:hover,
+    .nav-bar a.active {
+      color: #00e5ff;
+      transform: translateY(-3px);
+    }
+
+    .glass-btc-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      animation: glowPulse 2s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btc-icon {
+      font-size: 48px;
+      color: #ffcc00;
+      text-shadow: 0 0 10px rgba(255, 204, 0, 0.6), 0 0 20px rgba(255, 204, 0, 0.4);
+      animation: floatBTC 2s ease-in-out infinite;
+    }
+
+    @keyframes floatBTC {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 12px rgba(0, 255, 255, 0.2); }
+      50% { box-shadow: 0 0 24px rgba(0, 255, 255, 0.4); }
+    }
+
+    /* 🔥 New glass row added below */
+    .glass-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 15px 0 20px;
+    }
+
+    .glass-box {
+      flex: 0 0 48%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+      color: #fff;
+      padding: 16px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      animation: glowPulse 2s ease-in-out infinite;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .wave-glass-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wave-glass-box {
+  flex: 0 0 48%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 16px 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05),
+              0 0 10px rgba(0, 229, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.wave-glass-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0, 255, 255, 0.3);
+}
+
+.wave-glass-box i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #00e5ff;
+}
+
+
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="screen">
+
+    <div class="row">
+      <div class="box">Secure System</div>
+      <div class="box">Fast Payouts</div>
+    </div>
+
+    <div class="row">
+      <div class="box">24/7 Mining</div>
+      <div class="box">Low Fees</div>
+    </div>
+
+    <div class="large-box">
+      Welcome to our BTC mining platform. Earn passive income with ease!
+    </div>
+
+    <div class="animation-section glass-btc-box">
+      <div class="btc-icon">
+        <i class="fab fa-btc"></i>
+      </div>
+    </div>
+
+    <div class="row wave-glass-row">
+  <div class="wave-glass-box"><i class="fas fa-bolt"></i><br>Live Hashrate</div>
+  <div class="wave-glass-box"><i class="fas fa-clock"></i><br>Uptime 99.9%</div>
+</div>
+
+
+    <div class="typing-box" id="typingText"></div>
+
+    <h3>This platform is made for real users</h3>
+
+    <div class="wave-section">
+      <svg class="wave-svg" viewBox="0 0 1440 320">
+        <path fill="#ffffff44" fill-opacity="1" d="M0,160L60,165.3C120,171,240,181,360,165.3C480,149,600,107,720,101.3C840,96,960,128,1080,138.7C1200,149,1320,139,1380,133.3L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+      </svg>
+    </div>
+
+  </div>
+
+  <div class="nav-bar">
+    <a href="#"><i class="fas fa-home"></i>Home</a>
+    <a href="#"><i class="fas fa-industry"></i>Mining</a>
+    <a href="#"><i class="fas fa-bullhorn"></i>Promotion</a>
+    <a href="#"><i class="fas fa-wallet"></i>Wallet</a>
+    <a href="#"><i class="fas fa-user"></i>Account</a>
+  </div>
+</div>
+
+<script>
+  const texts = [
+    "Earn BTC Daily!",
+    "Start mining in one click",
+    "No hidden fees",
+    "Withdraw anytime"
+  ];
+
+  let index = 0;
+  let typingBox = document.getElementById("typingText");
+
+  function typeText() {
+    let text = texts[index];
+    let i = 0;
+    typingBox.innerHTML = "";
+
+    let typingInterval = setInterval(() => {
+      if (i < text.length) {
+        typingBox.innerHTML += text[i];
+        i++;
+      } else {
+        clearInterval(typingInterval);
+        setTimeout(() => {
+          typingBox.innerHTML = "";
+          index = (index + 1) % texts.length;
+          typeText();
+        }, 2000);
+      }
+    }, 60);
+  }
+
+  typeText();
+</script>
+
+</body>
+</html>
