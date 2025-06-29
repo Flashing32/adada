@@ -421,7 +421,26 @@ html, body {
   }
 
   typeText();
+ <script>
+  let alreadyReloaded = false;
+
+  window.addEventListener('scroll', () => {
+    if (alreadyReloaded) return;
+
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.body.offsetHeight;
+
+    if (scrollTop + windowHeight >= fullHeight - 2) {
+      alreadyReloaded = true;
+      setTimeout(() => {
+        location.reload();
+      }, 500);
+    }
+  });
 </script>
+
+
 
 </body>
 </html>
